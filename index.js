@@ -18,8 +18,10 @@ app.use(bodyParser.json())
 const urlsdb = admin.firestore().collection("urlsdb");
 
 app.post("/admin/url", (req, res) => {
-    console.log(req.body)
-    res.send(req.body)
+    const {short, url} = req.body;
+    const doc = urlsdb.doc(short);
+    doc.set({url});
+    res.send("<h1>URL Not Exists</h1>");
 })
 
 app.get("/:short", (req, res) => {
